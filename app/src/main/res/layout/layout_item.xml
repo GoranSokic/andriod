@@ -87,21 +87,7 @@
                 >
             </TextView>
 
-            <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/time"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:text="Okey"
-                android:textStyle="bold"
-                android:textSize="12sp"
-
-
-
-                >
-            </TextView>
 
 
         </LinearLayout>

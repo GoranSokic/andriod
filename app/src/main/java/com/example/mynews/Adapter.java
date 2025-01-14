@@ -18,16 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
     Context context;
     ArrayList<ModelClass> modelClassArrayList;
+    private ArrayList<ModelClass> fullList;
 
     public Adapter(Context context, ArrayList<ModelClass> modelClassArrayList) {
         this.context = context;
         this.modelClassArrayList = modelClassArrayList;
+        this.fullList = new ArrayList<>(modelClassArrayList);
+
     }
 
     @NonNull
@@ -51,7 +55,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         });
 
-        holder.mtime.setText("Published At: " + modelClassArrayList.get(position).getPublischedAt());
         holder.mauthor.setText(modelClassArrayList.get(position).getAuthor());
         holder.mheading.setText(modelClassArrayList.get(position).getTitle());
         holder.mcontent.setText(modelClassArrayList.get(position).getDescription());
@@ -64,10 +67,27 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public int getItemCount() {
         return modelClassArrayList.size();
     }
+    public void updateData(List<ModelClass> newList) {
+        modelClassArrayList.clear();
+        modelClassArrayList.addAll(newList);
+        notifyDataSetChanged();
+    }
 
+
+    public void setFullList(List<ModelClass> newList) {
+        fullList.clear();
+        fullList.addAll(newList);
+    }
+
+
+    public void resetData() {
+        modelClassArrayList.clear();
+        modelClassArrayList.addAll(fullList);
+        notifyDataSetChanged();
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mheading, mcontent, mauthor, mtime;
+        TextView mheading, mcontent, mauthor;
         CardView cardView;
 
         ImageView imageView;
@@ -80,7 +100,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             mheading = itemView.findViewById(R.id.mainheading);
             mcontent = itemView.findViewById(R.id.content);
             mauthor = itemView.findViewById(R.id.author);
-            mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
             cardView = itemView.findViewById(R.id.cardview);
 
